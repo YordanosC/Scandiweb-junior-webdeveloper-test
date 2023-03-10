@@ -6,12 +6,11 @@ header('Access-Control-Allow-Methods: GET');
 
 
 include_once "../../includes/autoload.php";
-include_once "../../config/command.php";
 
 
 // Instantiate product object can be any product
 $product = new DVD();
-
+$pt = new ProductType();
 $result = null;
 if (isset($_GET['sku'])) {
     $given_sku = $_GET['sku'];
@@ -25,15 +24,15 @@ if (isset($_GET['sku'])) {
 // Get row count
 $num = $result->rowCount();
 // Check if any products
-if ($num > 0 and isset($commands)) {
+if ($num > 0 ) { //and isset($commands)
     // Category array
     $cat_arr['data'] = array();
 
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
         $my_row = (object)$row;
-        $cat_item = ($commands[$my_row->type]($my_row));
-
+        $cat_item = $pt->getType($my_row->type,$my_row);
+        
         // Push to "data"
         $cat_arr['data'][] = $cat_item->toArray();
     }
@@ -47,3 +46,5 @@ if ($num > 0 and isset($commands)) {
         array('data' => array())
     );
 }
+
+

@@ -7,17 +7,17 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 
 include_once '../../includes/autoload.php';
 include_once '../../config/Database.php';
-include_once  '../../config/command.php';
 
 
 $data = json_decode(file_get_contents("php://input"));
 
 // Instantiate product object can be any product for check the existence
 $prod = new DVD();
+$pt = new ProductType();
 $result = null;
 
-if(isset($commands)){
-    $product = $commands[$data->type]($data);
+if(isset($data->sku)){ 
+    $product = $pt->getType($data->type,$data);
 
     // check sku uniqueness
     $given_sku = $data->sku;
