@@ -31,7 +31,7 @@ if ($num > 0 ) { //and isset($commands)
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
         $my_row = (object)$row;
-        $cat_item = $pt->getType($my_row->type,$my_row);
+        $cat_item = $pt->getByType($my_row->type,$my_row);
         
         // Push to "data"
         $cat_arr['data'][] = $cat_item->toArray();

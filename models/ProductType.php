@@ -1,6 +1,6 @@
 <?php
 class ProductType {
-    public function getType($type,$data) {
+    public function getByType($type,$data) {
         switch ($type){
             case "DVD":
                 $dvd = new DVD();

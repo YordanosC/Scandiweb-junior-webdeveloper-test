@@ -17,7 +17,7 @@ $pt = new ProductType();
 $result = null;
 
 if(isset($data->sku)){ 
-    $product = $pt->getType($data->type,$data);
+    $product = $pt->getByType($data->type,$data);
 
     // check sku uniqueness
     $given_sku = $data->sku;
